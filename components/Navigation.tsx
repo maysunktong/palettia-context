@@ -6,27 +6,31 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useUserContext } from "../contexts/contexts";
 
-const navItems = [
-  { name: "Home", icon: <House />, path: "/", role: "user" },
+const userNavItems = [
+  { name: "Home", icon: <House />, path: "/" },
   {
     name: "Categories",
     icon: <LayoutGrid />,
     path: "/categories",
-    role: "user",
   },
-  { name: "Favorites", icon: <HeartPlus />, path: "/favorites", role: "user" },
-  { name: "Profile", icon: <User />, path: "/profile", role: "user" },
-  { name: "Users", icon: <Users />, path: "/admin", role: "admin" },
+  { name: "Favorites", icon: <HeartPlus />, path: "/favorites" },
+  { name: "Profile", icon: <User />, path: "/profile" },
+];
+
+const adminNavItems = [
+  { name: "Home", icon: <House />, path: "/" },
+  { name: "Users", icon: <Users />, path: "/admin" },
 ];
 
 export default function Navigation() {
   const { user, setUser } = useUserContext() as UserContext;
-  const [isLogginOut, setIsLoggingOut] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = () => {
     setIsLoggingOut(true);
     setTimeout(() => {
       setUser(null);
+      localStorage.removeItem("loggedInUser");
       setIsLoggingOut(false);
     }, 1000);
     return;
@@ -61,32 +65,39 @@ export default function Navigation() {
     );
   }, []);
 
+  const navItems = user.role === "admin" ? adminNavItems : userNavItems;
+
   return (
     <div
       className="max-w-4xl flex flex-col justify-start items-start py-6"
       ref={containerRef}
     >
       <Link href="/">
-        <img src="/logo.png" alt="" width={300} height={300} />
+        <img src="/logo.png" alt="Logo" width={300} height={300} />
       </Link>
+
       <ul className="w-full flex flex-col justify-center items-start gap-4">
-        {navItems
-          .filter((item) => item.role === user.role)
-          .map((item, index) => (
-            <Link key={item.name} href={item.path} className="w-full">
-              <li
-                className="w-full flex gap-4 rounded-xl hover:bg-[#00b4d8] hover:text-white p-4 cursor-pointer"
-                ref={(el: HTMLLIElement | null) => {
-                  if (el) itemsRef.current[index] = el;
-                }}
-              >
-                {item.icon} {item.name}
-              </li>
-            </Link>
-          ))}
+        {navItems.map((item, index) => (
+          <Link key={item.name} href={item.path} className="w-full">
+            <li
+              className="w-full flex gap-4 rounded-xl hover:bg-[#00b4d8] hover:text-white p-4 cursor-pointer"
+              ref={(el: HTMLLIElement | null) => {
+                if (el) itemsRef.current[index] = el;
+              }}
+            >
+              {item.icon} {item.name}
+            </li>
+          </Link>
+        ))}
       </ul>
-      <button type="button" onClick={handleLogout} className="cursor-pointer">
-        {isLogginOut ? "Logging out..." : "Log out"}
+
+      <p>User: {user.name}</p>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="cursor-pointer mt-4"
+      >
+        {isLoggingOut ? "Logging out..." : "Log out"}
       </button>
     </div>
   );
