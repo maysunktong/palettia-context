@@ -20,7 +20,17 @@ const navItems = [
 ];
 
 export default function Navigation() {
-  const { user } = useUserContext() as UserContext;
+  const { user, setUser } = useUserContext() as UserContext;
+  const [isLogginOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggingOut(true);
+    setTimeout(() => {
+      setUser(null);
+      setIsLoggingOut(false);
+    }, 1000);
+    return;
+  };
 
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
@@ -63,9 +73,8 @@ export default function Navigation() {
         {navItems
           .filter((item) => item.role === user.role)
           .map((item, index) => (
-            <Link href={item.path} className="w-full">
+            <Link key={item.name} href={item.path} className="w-full">
               <li
-                key={item.name}
                 className="w-full flex gap-4 rounded-xl hover:bg-[#00b4d8] hover:text-white p-4 cursor-pointer"
                 ref={(el: HTMLLIElement | null) => {
                   if (el) itemsRef.current[index] = el;
@@ -76,7 +85,9 @@ export default function Navigation() {
             </Link>
           ))}
       </ul>
-      <button>Log out</button>
+      <button type="button" onClick={handleLogout} className="cursor-pointer">
+        {isLogginOut ? "Logging out..." : "Log out"}
+      </button>
     </div>
   );
 }
