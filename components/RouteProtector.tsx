@@ -1,8 +1,8 @@
 "use client";
 
-import { ReactNode } from "react";
 import { useUserContext } from "../contexts/contexts";
-import LoginForm from "./LoginForm";
+import { ReactNode } from "react";
+import LoginForm from "../components/LoginForm";
 
 export default function RouteProtector({ children }: { children: ReactNode }) {
   const { user } = useUserContext() as UserContext;
