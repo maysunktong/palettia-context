@@ -2,9 +2,9 @@
 
 import gsap from "gsap";
 import { User, HeartPlus, House, LayoutGrid, Users } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { useUserContext } from "../contexts/contexts";
 
 const navItems = [
   { name: "Home", icon: <House />, path: "/", role: "user" },
@@ -20,12 +20,7 @@ const navItems = [
 ];
 
 export default function Navigation() {
-  const [role, setRole] = useState<"user" | "admin">();
-
-  useEffect(() => {
-    const currentRole = "user";
-    setRole(currentRole as "user" | "admin");
-  }, []);
+  const { user, setUser } = useUserContext() as UserContext;
 
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
@@ -62,11 +57,11 @@ export default function Navigation() {
       ref={containerRef}
     >
       <Link href="/">
-        <Image src="/logo.png" alt="" width={300} height={300} />
+        <img src="/logo.png" alt="" width={300} height={300} />
       </Link>
       <ul className="w-full flex flex-col justify-center items-start gap-4">
         {navItems
-          .filter((item) => role === "admin" || item.role === "user")
+          .filter((item) => item.role === user.role)
           .map((item, index) => (
             <li
               key={item.name}

@@ -1,11 +1,16 @@
 export const UserData: User[] = [
   {
-    name: "mike",
-    password: "user123",
+    name: "User1",
+    password: "user",
     role: "user",
   },
   {
-    name: "admin",
+    name: "User2",
+    password: "user",
+    role: "user",
+  },
+  {
+    name: "Admin",
     password: "admin",
     role: "admin",
   },
