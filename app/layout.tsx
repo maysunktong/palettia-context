@@ -7,6 +7,9 @@ import ClientWrapperNavigation from "../components/ClientWrapperNavigation";
 export const metadata: Metadata = {
   title: "Palettia",
   description: "Color palette generator",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

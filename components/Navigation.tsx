@@ -16,11 +16,11 @@ const navItems = [
   },
   { name: "Favorites", icon: <HeartPlus />, path: "/favorites", role: "user" },
   { name: "Profile", icon: <User />, path: "/profile", role: "user" },
-  { name: "Users", icon: <Users />, path: "/users", role: "admin" },
+  { name: "Users", icon: <Users />, path: "/admin", role: "admin" },
 ];
 
 export default function Navigation() {
-  const { user, setUser } = useUserContext() as UserContext;
+  const { user } = useUserContext() as UserContext;
 
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
@@ -63,17 +63,17 @@ export default function Navigation() {
         {navItems
           .filter((item) => item.role === user.role)
           .map((item, index) => (
-            <li
-              key={item.name}
-              className="rounded-xl hover:bg-gradient-to-r hover:from-[#5e7ce2] to-[#92b4f4] hover:text-white p-4 w-full cursor-pointer"
-              ref={(el: HTMLLIElement | null) => {
-                if (el) itemsRef.current[index] = el;
-              }}
-            >
-              <Link href={item.path} className="flex gap-4">
+            <Link href={item.path} className="w-full">
+              <li
+                key={item.name}
+                className="w-full flex gap-4 rounded-xl hover:bg-[#00b4d8] hover:text-white p-4 cursor-pointer"
+                ref={(el: HTMLLIElement | null) => {
+                  if (el) itemsRef.current[index] = el;
+                }}
+              >
                 {item.icon} {item.name}
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
       </ul>
       <button>Log out</button>
