@@ -1,10 +1,10 @@
 import Navigation from "./Navigation";
 
-export default function UserDashboard() {
+export default function Dashboard() {
   return (
     <>
       <Navigation />
-      <p>User Dashboard</p>
+      <p>Dashboard</p>
     </>
   );
 }

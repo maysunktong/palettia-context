@@ -1,10 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-
 import { useUserContext } from "../contexts/contexts";
-import UserDashboard from "./UserDashboard";
-import AdminDashboard from "./AdminDashboard";
+import Home from "../app/page";
 import LoginForm from "./LoginForm";
 
 export default function RouteProtector({ children }: { children: ReactNode }) {
@@ -15,11 +13,11 @@ export default function RouteProtector({ children }: { children: ReactNode }) {
   }
 
   if (user.role === "user") {
-    return <UserDashboard />;
+    return <Home />;
   }
 
   if (user.role === "admin") {
-    return <AdminDashboard />;
+    return <Home />;
   }
 
   return <>{children}</>;
