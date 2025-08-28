@@ -98,7 +98,7 @@ export default function ColorGenerator() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search color palettes..."
-              className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent bg-white"
+              className="w-full pl-12 pr-4 py-2 text-black text-lg border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent bg-white"
             />
           </div>
         </form>
