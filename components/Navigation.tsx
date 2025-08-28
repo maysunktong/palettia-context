@@ -65,7 +65,7 @@ export default function Navigation() {
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-start items-start p-6 bg-gray-50"
+      className="w-full h-full flex flex-col justify-start items-start p-6 bg-white border-1 border-gray-100"
       ref={containerRef}
     >
       <Link href="/">
@@ -76,7 +76,7 @@ export default function Navigation() {
         {navItems.map((item, index) => (
           <Link key={item.name} href={item.path} className="w-full">
             <li
-              className="w-full flex gap-4 rounded-xl hover:bg-[#00b4d8] hover:text-white p-4 cursor-pointer"
+              className="w-full flex gap-4 rounded-xl hover:bg-blue-600 hover:text-white p-4 cursor-pointer"
               ref={(el: HTMLLIElement | null) => {
                 if (el) itemsRef.current[index] = el;
               }}

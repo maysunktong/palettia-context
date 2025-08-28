@@ -84,7 +84,7 @@ export default function ColorGenerator() {
           Color Palette Generator
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Create your very own palette
+          Type to generate your very own palettes 🎨
         </p>
       </div>
       <div className="max-w-4xl mx-auto mb-12">
