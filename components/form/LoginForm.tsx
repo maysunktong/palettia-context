@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { UserData } from "../data/users";
-import { useUserContext } from "../contexts/contexts";
+import { UserData } from "../../data/users";
+import { useUserContext } from "../../contexts/contexts";
 
 type FormInputs = {
   username: string;

@@ -2,7 +2,7 @@
 
 import { useUserContext } from "../contexts/contexts";
 import { ReactNode } from "react";
-import LoginForm from "./LoginForm";
+import LoginForm from "./form/LoginForm";
 
 export default function RouteProtector({ children }: { children: ReactNode }) {
   const { user } = useUserContext() as UserContext;
