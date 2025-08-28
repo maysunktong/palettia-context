@@ -17,7 +17,7 @@ export default function ColorGenerator() {
   const randomizedSearchQuery =
     popularSearches[Math.floor(Math.random() * popularSearches.length)];
 
-  const searchPalettes = async (query: string) => {
+  const fetchPalettes = async (query: string) => {
     if (!query.trim()) return;
 
     setLoading(true);
@@ -60,17 +60,17 @@ export default function ColorGenerator() {
 
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    searchPalettes(searchQuery);
+    fetchPalettes(searchQuery);
   };
 
   useEffect(() => {
     const urlSearchQuery = searchParams.get("search");
     if (urlSearchQuery) {
       setSearchQuery(urlSearchQuery);
-      searchPalettes(urlSearchQuery);
+      fetchPalettes(urlSearchQuery);
     } else {
       setTimeout(() => {
-        searchPalettes(randomizedSearchQuery);
+        fetchPalettes(randomizedSearchQuery);
       }, 1000);
     }
   }, []);
