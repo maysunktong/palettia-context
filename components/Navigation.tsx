@@ -98,7 +98,7 @@ export default function Navigation() {
                   ${
                     isActive
                       ? "bg-blue-600 text-white"
-                      : "hover:bg-blue-400 hover:text-white"
+                      : "hover:bg-purple-400 hover:text-white"
                   }
                 `}
                 ref={(el: HTMLLIElement | null) => {

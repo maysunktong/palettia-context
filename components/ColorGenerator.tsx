@@ -154,7 +154,7 @@ export default function ColorGenerator() {
                           key={index}
                           onClick={() => {
                             setSearchQuery(tag);
-                            searchPalettes(tag);
+                            fetchPalettes(tag);
                           }}
                           className="text-gray-400 hover:text-blue-600 px-2 py-1 rounded-2xl cursor-pointer transition-colors"
                         >
@@ -185,7 +185,7 @@ export default function ColorGenerator() {
       {!loading && !error && palettes.length === 0 && (
         <div className="w-full text-center py-12">
           <p className="text-gray-500">
-            😭 We are trying to fetch from API. Please wait...
+            👩🏻‍💻 We are trying to fetch from API. Please wait...
           </p>
         </div>
       )}
