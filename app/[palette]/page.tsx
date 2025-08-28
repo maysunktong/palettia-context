@@ -10,7 +10,7 @@ export default function PalettePage({ params }: PalettePageProps) {
   const router = useRouter();
   const [palette, setPalette] = useState<Palette | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const { user, setUser } = useUserContext() as UserContext;
+  const { user } = useUserContext() as UserContext;
   const { favorites, setFavorites } = useFavorites() as FavoritesContext;
   const username = user.name;
 

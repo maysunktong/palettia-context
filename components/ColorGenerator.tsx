@@ -116,8 +116,8 @@ export default function ColorGenerator() {
                 className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <div className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-semibold text-gray-800 flex-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm md:text-lg font-semibold text-gray-800 flex-1 py-2">
                       {palette.text}
                     </h3>
                     <button

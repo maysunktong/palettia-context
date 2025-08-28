@@ -84,12 +84,11 @@ export default function Favorites() {
               >
                 <X className="w-8 h-8" />
               </button>
-
               <div
                 onClick={() => navigateToSinglePalette(palette)}
                 className="cursor-pointer"
               >
-                <h3 className="font-medium text-gray-800 mb-2 truncate pr-8">
+                <h3 className="text-sm md:text-lg font-semibold text-gray-800 flex-1 py-2">
                   {palette.text}
                 </h3>
                 <div className="w-full flex cursor-pointer">
@@ -106,16 +105,14 @@ export default function Favorites() {
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-1">
-                  {palette.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {palette.tags && palette.tags.length > 0 && (
+                  <div className="flex flex-wrap justify-start items-center gap-1 mt-3 text-xs">
+                    <p className="text-gray-400">Keywords: </p>
+                    {palette.tags.slice(0, 3).map((tag) => (
+                      <p key={tag}>{tag}</p>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}

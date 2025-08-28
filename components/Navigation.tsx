@@ -95,7 +95,7 @@ export default function Navigation() {
             <Link key={item.name} href={item.path} className="w-full">
               <li
                 className={`w-full flex gap-6 p-4 cursor-pointer rounded 
-                  ${isActive ? "bg-blue-600 text-white" : "hover:bg-gray-200"}
+                  ${isActive ? "bg-blue-600 text-white" : "hover:bg-gray-200 dark:hover:text-black"}
                 `}
                 ref={(el: HTMLLIElement | null) => {
                   if (el) itemsRef.current[index] = el;
