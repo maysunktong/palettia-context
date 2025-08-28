@@ -7,7 +7,7 @@ export default function ProfilePage() {
 
   return (
     <div className="w-full h-auto bg-background flex items-center justify-center p-6">
-      <div className="w-full max-w-sm border rounded-xl p-6 bg-white dark:bg-gray-900 dark:border-gray-800">
+      <div className="w-full max-w-sm border-1 border-gray-700 p-6 bg-white dark:bg-gray-900 dark:border-gray-800">
         <div className="space-y-4 text-center">
           <img
             src={user.image}
