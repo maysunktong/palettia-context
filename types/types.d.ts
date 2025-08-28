@@ -32,3 +32,8 @@ interface PalettePageProps {
     palette: string;
   }>;
 }
+
+interface FavoritesContext {
+  favorites: Palette[];
+  setFavorites: (favorites: Palette[]) => void;
+}

@@ -78,7 +78,7 @@ export default function PalettePage({ params }: PalettePageProps) {
             </h1>
             <div className="flex flex-wrap justify-center items-center gap-1 md:gap-2 py-4">
               {palette.tags.slice(0, 5).map((tag) => (
-                <p className="text-xs md:text-md font-medium text-gray-800 border-1 border-gray-200 rounded-2xl py-1 px-6">
+                <p key={tag} className="text-xs md:text-md font-medium text-gray-800 border-1 border-gray-200 rounded-2xl py-1 px-6">
                   {tag}
                 </p>
               ))}
@@ -92,7 +92,7 @@ export default function PalettePage({ params }: PalettePageProps) {
                     style={{ backgroundColor: color }}
                   >
                     <p className="absolute inset-0 flex items-center justify-center text-md font-medium text-gray-800">
-                      {color.toUpperCase()}
+                      {color}
                     </p>
                   </div>
                 ))}

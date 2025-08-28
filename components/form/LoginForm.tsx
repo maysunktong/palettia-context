@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { UserData } from "../../data/users";
-import { useUserContext } from "../../contexts/contexts";
+import { useUserContext } from "../../contexts/UserContext";
 
 type FormInputs = {
   username: string;
