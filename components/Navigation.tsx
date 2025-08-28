@@ -8,11 +8,6 @@ import { useUserContext } from "../contexts/contexts";
 
 const userNavItems = [
   { name: "Home", icon: <House />, path: "/" },
-  {
-    name: "Categories",
-    icon: <LayoutGrid />,
-    path: "/categories",
-  },
   { name: "Favorites", icon: <HeartPlus />, path: "/favorites" },
   { name: "Profile", icon: <User />, path: "/profile" },
 ];
@@ -36,6 +31,7 @@ export default function Navigation() {
     return;
   };
 
+  /* animation GSAP */
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
 
@@ -69,7 +65,7 @@ export default function Navigation() {
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col justify-start items-start p-6 bg-gray-50"
+      className="w-full h-full flex flex-col justify-start items-start p-6 bg-gray-50"
       ref={containerRef}
     >
       <Link href="/">
@@ -90,8 +86,6 @@ export default function Navigation() {
           </Link>
         ))}
       </ul>
-
-      <p>User: {user.name}</p>
       <button
         type="button"
         onClick={handleLogout}

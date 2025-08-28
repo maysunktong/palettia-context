@@ -9,7 +9,7 @@ export default function ClientWrapperNavigation({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-20 min-h-screen w-full gap-4">
+    <div className="grid grid-cols-20 min-h-screen w-full">
       <div className="col-span-3">
         <Navigation />
       </div>
