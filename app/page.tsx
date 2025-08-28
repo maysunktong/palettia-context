@@ -1,7 +1,8 @@
+"use client"
+
+import { useUserContext } from "../contexts/contexts";
+
 export default function Home() {
-  return (
-    <>
-      <p>Home</p>
-    </>
-  );
+  const { user } = useUserContext() as UserContext;
+  return <>Welcome, {user.name}</>;
 }

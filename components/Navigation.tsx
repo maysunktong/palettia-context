@@ -69,14 +69,14 @@ export default function Navigation() {
 
   return (
     <div
-      className="max-w-4xl flex flex-col justify-start items-start py-6"
+      className="w-full min-h-screen flex flex-col justify-start items-start py-6 bg-gradient-to-br from-purple-50 via-blue-50 to-white"
       ref={containerRef}
     >
       <Link href="/">
         <img src="/logo.png" alt="Logo" width={300} height={300} />
       </Link>
 
-      <ul className="w-full flex flex-col justify-center items-start gap-4">
+      <ul className="w-full flex flex-col justify-center items-start gap-1">
         {navItems.map((item, index) => (
           <Link key={item.name} href={item.path} className="w-full">
             <li

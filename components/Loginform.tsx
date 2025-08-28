@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserData } from "../data/users";
 import { useUserContext } from "../contexts/contexts";
 
@@ -74,9 +74,9 @@ export default function LoginForm() {
       );
       if (loggedInUser) {
         setUser(loggedInUser);
-        console.log("✅ Logged in. User: " + loggedInUser.name);
-      } else {
-        console.log("No user.");
+        console.log("✅ LOGGED IN -- User: " + loggedInUser.name);
+
+        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       }
 
       setFormInput({
@@ -86,6 +86,20 @@ export default function LoginForm() {
     }, 1000);
     return;
   };
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("loggedInUser");
+    if (savedUser) {
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        setUser(parsedUser);
+        console.log("✅ LOGGED IN -- User: " + parsedUser.name);
+      } catch (error) {
+        console.error("Error parsing saved user data:", error);
+        localStorage.removeItem("loggedInUser");
+      }
+    }
+  }, [setUser]);
 
   return (
     <form>
@@ -123,7 +137,7 @@ export default function LoginForm() {
           {error.password}
         </span>
       )}
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit" onClick={handleSubmit} className="cursor-pointer">
         {isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>

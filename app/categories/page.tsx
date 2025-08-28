@@ -1,7 +1,9 @@
+import ColorGenerator from "../../components/ColorGenerator";
+
 export default function Categories() {
   return (
     <>
-      <p>Categories</p>
+      <ColorGenerator />
     </>
   );
 }

@@ -1,0 +1,180 @@
+// app/page.tsx
+"use client";
+
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
+
+interface Palette {
+  id: string;
+  colors: string[];
+  tags: string[];
+  text: string;
+  likesCount: number;
+  normalizedHash: string;
+  createdAt: string;
+}
+
+export default function ColorGenerator() {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [palettes, setPalettes] = useState<Palette[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const popularSearches = ["summer", "pastel", "autumn", "candy"];
+
+  const randomizedSearchQuery =
+    popularSearches[Math.floor(Math.random() * popularSearches.length)];
+
+  const searchPalettes = async (query: string) => {
+    if (!query.trim()) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/palette", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (Array.isArray(data)) {
+        setPalettes(data);
+        if (data.length === 0) {
+          setError("No palettes found");
+        }
+      } else {
+        throw new Error("Wrong format. Data needs to be array");
+      }
+    } catch (err) {
+      console.error("API Error:", err);
+      setError(
+        `Search failed: ${err instanceof Error ? err.message : "Unknown error"}`
+      );
+      setPalettes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    searchPalettes(searchQuery);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      searchPalettes(randomizedSearchQuery);
+    }, 500);
+  }, []);
+
+  return (
+    <div className="w-full min-h-screen bg-white p-6">
+      <div className="text-center my-12">
+        <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-5">
+          Color Palette Generator
+        </h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Generate your own palette
+        </p>
+      </div>
+      <div className="max-w-4xl mx-auto mb-12">
+        <form onSubmit={handleSearch} className="relative mb-6">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for color palettes..."
+              className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent bg-white"
+            />
+          </div>
+        </form>
+      </div>
+
+      {!loading && palettes.length > 0 && (
+        <div>
+          <p>
+            Found {palettes.length} results for keyword: {searchQuery}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {palettes.map((palette) => (
+              <div
+                key={palette.id}
+                className="bg-white rounded-2xl shadow-sm overflow-hidden"
+              >
+                <div className="p-2">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                    {palette.text}
+                  </h3>
+                  <div className="w-full flex">
+                    {palette.colors.map((color, index) => (
+                      <div
+                        key={index}
+                        className="group relative flex-1 aspect-square rounded border border-gray-200 overflow-hidden cursor-pointer"
+                        style={{ backgroundColor: color }}
+                      >
+                        <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-gray-800 opacity-0 group-hover:opacity-100">
+                          {color}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {palette.tags && palette.tags.length > 0 && (
+                    <div className="flex flex-wrap justify-start items-center gap-1 mt-3 text-xs">
+                      <p className="text-gray-400">Keys: </p>
+                      {palette.tags.slice(0, 3).map((tag, index) => (
+                        <button
+                          type="button"
+                          key={index}
+                          onClick={() => {
+                            setSearchQuery(tag);
+                            searchPalettes(tag);
+                          }}
+                          className="text-gray-400 hover:text-green-400 px-2 py-1 rounded-2xl cursor-pointer"
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="w-full text-center py-12">
+          <p className="text-gray-500">⚠️ Error occured 👷🏻‍♀️</p>
+        </div>
+      )}
+
+      {loading && (
+        <div className="w-full text-center py-12">
+          <p className="text-gray-500">Loading ...</p>
+        </div>
+      )}
+
+      {!loading && !error && palettes.length === 0 && (
+        <div className="w-full text-center py-12">
+          <p className="text-gray-500">
+            😭 We are trying to fetch from API. Please wait...
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
