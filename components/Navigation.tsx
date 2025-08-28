@@ -1,7 +1,7 @@
 "use client";
 
 import gsap from "gsap";
-import { User, HeartPlus, House, LayoutGrid, Users } from "lucide-react";
+import { User, HeartPlus, House, Users } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useUserContext } from "../contexts/contexts";
@@ -65,18 +65,17 @@ export default function Navigation() {
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-start items-start p-6 bg-white border-1 border-gray-100"
+      className="w-full h-full flex flex-col justify-start items-start p-6 bg-gray-50 border-1 border-gray-100 dark:border-none"
       ref={containerRef}
     >
       <Link href="/">
         <img src="/logo.png" alt="Logo" width={300} height={300} />
       </Link>
-
       <ul className="w-full flex flex-col justify-center items-start gap-1">
         {navItems.map((item, index) => (
           <Link key={item.name} href={item.path} className="w-full">
             <li
-              className="w-full flex gap-4 rounded-xl hover:bg-blue-600 hover:text-white p-4 cursor-pointer"
+              className="w-full flex gap-4 hover:bg-blue-600 hover:text-white p-4 cursor-pointer"
               ref={(el: HTMLLIElement | null) => {
                 if (el) itemsRef.current[index] = el;
               }}
@@ -89,7 +88,7 @@ export default function Navigation() {
       <button
         type="button"
         onClick={handleLogout}
-        className="cursor-pointer mt-4"
+        className="cursor-pointer mt-8 py-3 px-6 bg-none border-1 border-gray-300 text-gray-400 hover:border-gray-600 hover:text-black dark:hover:text-white dark:border-gray-600 dark:hover:border-gray-300"
       >
         {isLoggingOut ? "Logging out..." : "Log out"}
       </button>

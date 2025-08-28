@@ -9,9 +9,6 @@ interface Palette {
   colors: string[];
   tags: string[];
   text: string;
-  likesCount: number;
-  normalizedHash: string;
-  createdAt: string;
 }
 
 export default function ColorGenerator() {
@@ -83,11 +80,11 @@ export default function ColorGenerator() {
         <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-5">
           Color Palette Generator
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-blue-600 text-lg max-w-2xl mx-auto">
           Type to generate your very own palettes 🎨
         </p>
       </div>
-      <div className="max-w-4xl mx-auto mb-12">
+      <div className="max-w-4xl mx-auto mb-4">
         <form onSubmit={handleSearch} className="relative mb-6">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -142,7 +139,7 @@ export default function ColorGenerator() {
                             setSearchQuery(tag);
                             searchPalettes(tag);
                           }}
-                          className="text-gray-400 hover:text-green-400 px-2 py-1 rounded-2xl cursor-pointer"
+                          className="text-gray-400 hover:text-blue-600 px-2 py-1 rounded-2xl cursor-pointer"
                         >
                           {tag}
                         </button>
