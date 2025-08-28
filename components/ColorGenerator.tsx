@@ -69,9 +69,7 @@ export default function ColorGenerator() {
       setSearchQuery(urlSearchQuery);
       fetchPalettes(urlSearchQuery);
     } else {
-      setTimeout(() => {
-        fetchPalettes(randomizedSearchQuery);
-      }, 1000);
+      fetchPalettes(randomizedSearchQuery);
     }
   }, []);
 
@@ -115,9 +113,9 @@ export default function ColorGenerator() {
             {palettes.map((palette) => (
               <div
                 key={palette.id}
-                className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
+                className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
               >
-                <div className="p-2">
+                <div className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-xl font-semibold text-gray-800 flex-1">
                       {palette.text}
@@ -177,8 +175,9 @@ export default function ColorGenerator() {
       )}
 
       {loading && (
-        <div className="w-full text-center py-12">
-          <p className="text-gray-500">Loading ...</p>
+        <div className="w-full min-h-screen bg-white p-8 flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          <p>Loading...</p>
         </div>
       )}
 
