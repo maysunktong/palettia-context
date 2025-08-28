@@ -12,7 +12,7 @@ export default function ColorGenerator() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const popularSearches = ["summer", "pastel", "autumn", "candy"];
+  const popularSearches = ["summer", "pastel", "autumn", "candy", "winter"];
 
   const randomizedSearchQuery =
     popularSearches[Math.floor(Math.random() * popularSearches.length)];
