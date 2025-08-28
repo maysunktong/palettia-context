@@ -78,13 +78,13 @@ export default function ColorGenerator() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-white p-6">
+    <div className="w-full min-h-screen bg-white p-8">
       <div className="text-center my-12">
         <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-5">
           Color Palette Generator
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Generate your own palette
+          Create your very own palette
         </p>
       </div>
       <div className="max-w-4xl mx-auto mb-12">
@@ -104,8 +104,8 @@ export default function ColorGenerator() {
 
       {!loading && palettes.length > 0 && (
         <div>
-          <p>
-            Found {palettes.length} results for keyword: {searchQuery}
+          <p className="pb-4 text-lg text-right text-gray-500">
+            Found {palettes.length} results
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {palettes.map((palette) => (

@@ -69,7 +69,7 @@ export default function Navigation() {
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col justify-start items-start py-6 bg-gradient-to-br from-purple-50 via-blue-50 to-white"
+      className="w-full min-h-screen flex flex-col justify-start items-start p-6 bg-gray-50"
       ref={containerRef}
     >
       <Link href="/">
