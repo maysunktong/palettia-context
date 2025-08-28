@@ -10,3 +10,25 @@ interface UserContext {
 }
 
 /* UI types */
+
+interface Palette {
+  id: string;
+  colors: string[];
+  tags: string[];
+  text: string;
+}
+
+
+
+interface Palette {
+  id: string;
+  colors: string[];
+  tags: string[];
+  text: string;
+}
+
+interface PalettePageProps {
+  params: Promise<{
+    palette: string;
+  }>;
+}

@@ -1,17 +1,12 @@
-// app/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
-
-interface Palette {
-  id: string;
-  colors: string[];
-  tags: string[];
-  text: string;
-}
+import { Search, ExternalLink } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ColorGenerator() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [palettes, setPalettes] = useState<Palette[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,13 +61,30 @@ export default function ColorGenerator() {
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     searchPalettes(searchQuery);
+    const params = new URLSearchParams();
+    if (searchQuery.trim()) {
+      params.set("search", searchQuery);
+    }
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      searchPalettes(randomizedSearchQuery);
-    }, 500);
+    const urlSearchQuery = searchParams.get("search");
+    if (urlSearchQuery) {
+      setSearchQuery(urlSearchQuery);
+      searchPalettes(urlSearchQuery);
+    } else {
+      setTimeout(() => {
+        searchPalettes(randomizedSearchQuery);
+      }, 1000);
+    }
   }, []);
+
+  const navigateToSinglePalette = (palette: Palette) => {
+    const route = encodeURIComponent(palette.text);
+    console.log("Navigating to palette:", route);
+    router.push(`/${route}`);
+  };
 
   return (
     <div className="w-full min-h-screen bg-white p-8">
@@ -108,20 +120,30 @@ export default function ColorGenerator() {
             {palettes.map((palette) => (
               <div
                 key={palette.id}
-                className="bg-white rounded-2xl shadow-sm overflow-hidden"
+                className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <div className="p-2">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                    {palette.text}
-                  </h3>
-                  <div className="w-full flex">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-semibold text-gray-800 flex-1">
+                      {palette.text}
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => navigateToSinglePalette(palette)}
+                      className="text-gray-400 hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      {""}
+                      <ExternalLink className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="w-full flex cursor-pointer">
                     {palette.colors.map((color, index) => (
                       <div
                         key={index}
-                        className="group relative flex-1 aspect-square rounded border border-gray-200 overflow-hidden cursor-pointer"
+                        className="group relative flex-1 aspect-square overflow-hidden border-1 border-amber-50"
                         style={{ backgroundColor: color }}
                       >
-                        <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-gray-800 opacity-0 group-hover:opacity-100">
+                        <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-transparent hover:text-gray-700">
                           {color}
                         </span>
                       </div>
@@ -139,7 +161,7 @@ export default function ColorGenerator() {
                             setSearchQuery(tag);
                             searchPalettes(tag);
                           }}
-                          className="text-gray-400 hover:text-blue-600 px-2 py-1 rounded-2xl cursor-pointer"
+                          className="text-gray-400 hover:text-blue-600 px-2 py-1 rounded-2xl cursor-pointer transition-colors"
                         >
                           {tag}
                         </button>

@@ -5,6 +5,7 @@ import { User, HeartPlus, House, Users } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useUserContext } from "../contexts/contexts";
+import { usePathname } from "next/navigation";
 
 const userNavItems = [
   { name: "Home", icon: <House />, path: "/" },
@@ -63,27 +64,52 @@ export default function Navigation() {
 
   const navItems = user.role === "admin" ? adminNavItems : userNavItems;
 
+  const pathname = usePathname();
+
   return (
     <div
-      className="w-full h-full flex flex-col justify-start items-start p-6 bg-gray-50 border-1 border-gray-100 dark:border-none"
+      className="w-full h-full flex flex-col justify-start items-start p-6 border-1 border-gray-100 dark:border-none"
       ref={containerRef}
     >
       <Link href="/">
-        <img src="/logo.png" alt="Logo" width={300} height={300} />
+        <img
+          src="/logo-light.png"
+          alt="Logo"
+          width={300}
+          height={300}
+          className="block dark:hidden"
+        />
+        <img
+          src="/logo-dark.png"
+          alt="Logo Dark"
+          width={300}
+          height={300}
+          className="hidden dark:block"
+        />
       </Link>
-      <ul className="w-full flex flex-col justify-center items-start gap-1">
-        {navItems.map((item, index) => (
-          <Link key={item.name} href={item.path} className="w-full">
-            <li
-              className="w-full flex gap-4 hover:bg-blue-600 hover:text-white p-4 cursor-pointer"
-              ref={(el: HTMLLIElement | null) => {
-                if (el) itemsRef.current[index] = el;
-              }}
-            >
-              {item.icon} {item.name}
-            </li>
-          </Link>
-        ))}
+      <ul className="w-full flex flex-col justify-center items-start gap-1 py-6">
+        {navItems.map((item, index) => {
+          const isActive = pathname === item.path;
+
+          return (
+            <Link key={item.name} href={item.path} className="w-full">
+              <li
+                className={`w-full flex gap-6 p-4 cursor-pointer rounded 
+                  ${
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-blue-400 hover:text-white"
+                  }
+                `}
+                ref={(el: HTMLLIElement | null) => {
+                  if (el) itemsRef.current[index] = el;
+                }}
+              >
+                {item.icon} {item.name}
+              </li>
+            </Link>
+          );
+        })}
       </ul>
       <button
         type="button"
