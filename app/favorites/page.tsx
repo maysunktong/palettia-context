@@ -64,7 +64,7 @@ export default function Favorites() {
           <button
             type="button"
             onClick={() => router.push("/")}
-            className="cursor-pointer mt-8 py-3 px-6 bg-none border-1 border-gray-300 text-gray-400 hover:border-gray-600 hover:text-black dark:hover:text-white dark:border-gray-600 dark:hover:border-gray-300"
+            className="cursor-pointer mt-8 py-3 px-6 bg-none border-1 text-black hover:text-gray-400 hover:border-gray-400"
           >
             Explore
           </button>

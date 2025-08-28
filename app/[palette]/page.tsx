@@ -86,7 +86,7 @@ export default function PalettePage({ params }: PalettePageProps) {
   }
 
   return (
-    <div className="w-full h-full bg-white p-8 mt-12">
+    <div className="w-full h-full bg-white p-8">
       <div className="w-full">
         <div className="flex justify-between items-center mb-8">
           <button
@@ -154,3 +154,4 @@ export default function PalettePage({ params }: PalettePageProps) {
     </div>
   );
 }
+

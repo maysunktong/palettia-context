@@ -2,6 +2,7 @@
 "use client";
 
 import Navigation from "./Navigation";
+import WelcomeBanner from "./WelcomeBanner";
 
 export default function ClientWrapperNavigation({
   children,
@@ -13,7 +14,10 @@ export default function ClientWrapperNavigation({
       <div className="col-span-3">
         <Navigation />
       </div>
-      <div className="col-span-17">{children}</div>
+      <div className="col-span-17">
+        <WelcomeBanner />
+        {children}
+      </div>
     </div>
   );
 }

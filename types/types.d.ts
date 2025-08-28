@@ -1,6 +1,9 @@
 interface User {
   name: string,
+  lastname: string,
   password: string,
+  image: string,
+  email: string,
   role: string
 }
 

@@ -15,6 +15,8 @@ const userNavItems = [
 
 const adminNavItems = [
   { name: "Home", icon: <House />, path: "/" },
+  { name: "Favorites", icon: <HeartPlus />, path: "/favorites" },
+  { name: "Profile", icon: <User />, path: "/profile" },
   { name: "Users", icon: <Users />, path: "/admin" },
 ];
 
