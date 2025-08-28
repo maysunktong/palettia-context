@@ -61,11 +61,6 @@ export default function ColorGenerator() {
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     searchPalettes(searchQuery);
-    const params = new URLSearchParams();
-    if (searchQuery.trim()) {
-      params.set("search", searchQuery);
-    }
-    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   useEffect(() => {
@@ -87,12 +82,12 @@ export default function ColorGenerator() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white p-8">
-      <div className="text-center my-12">
-        <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-5">
+    <div className="w-full min-h-screen bg-white p-8 pb-24">
+      <div className="text-center my-6 md:my-12">
+        <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-5">
           Color Palette Generator
         </h1>
-        <p className="text-blue-600 text-lg max-w-2xl mx-auto">
+        <p className="text-sm md:text-lg text-blue-600 max-w-2xl mx-auto">
           Type to generate your very own palettes 🎨
         </p>
       </div>
@@ -104,7 +99,7 @@ export default function ColorGenerator() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for color palettes..."
+              placeholder="Search color palettes..."
               className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent bg-white"
             />
           </div>
@@ -113,7 +108,7 @@ export default function ColorGenerator() {
 
       {!loading && palettes.length > 0 && (
         <div>
-          <p className="pb-4 text-lg text-right text-gray-500">
+          <p className="pb-4 text-sm md:text-lg text-right text-gray-500">
             Found {palettes.length} results
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -152,7 +147,7 @@ export default function ColorGenerator() {
 
                   {palette.tags && palette.tags.length > 0 && (
                     <div className="flex flex-wrap justify-start items-center gap-1 mt-3 text-xs">
-                      <p className="text-gray-400">Keys: </p>
+                      <p className="text-gray-400">Keywords: </p>
                       {palette.tags.slice(0, 3).map((tag, index) => (
                         <button
                           type="button"

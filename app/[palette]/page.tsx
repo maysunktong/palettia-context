@@ -31,18 +31,16 @@ export default function PalettePage({ params }: PalettePageProps) {
 
       if (Array.isArray(data) && data.length > 0) {
         const foundPalette =
-          data.find(
-            (p) =>
-              p.text.toLowerCase() === id.toLowerCase()
-          ) || data[0];
+          data.find((p) => p.text.toLowerCase() === id.toLowerCase()) ||
+          data[0];
 
         console.log("Found palette:", foundPalette);
         setPalette(foundPalette);
       } else {
-        console.log("No palettes in response");
+        console.log("No palette found");
       }
-    } catch (err) {
-      console.log("Error fetching palette:", err);
+    } catch (error) {
+      console.log("Error fetching a palette:", error);
     }
 
     setLoading(false);
@@ -76,21 +74,15 @@ export default function PalettePage({ params }: PalettePageProps) {
 
         {palette ? (
           <div>
-            {/* Palette name */}
             <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
               {palette.text}
             </h1>
-
-            {/* Colors display */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {palette.colors.map((color, index) => (
-                <div key={index} className="text-center">
-                  {/* Color square */}
-                  <div
-                    className="w-full aspect-square rounded-lg mb-2"
-                    style={{ backgroundColor: color }}
-                  ></div>
-                  {/* Color code */}
+                <div
+                  className="w-full aspect-square rounded-lg mb-2"
+                  style={{ backgroundColor: color }}
+                >
                   <p className="text-gray-800 font-mono text-sm">
                     {color.toUpperCase()}
                   </p>
