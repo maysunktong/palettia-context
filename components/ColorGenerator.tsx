@@ -170,7 +170,7 @@ export default function ColorGenerator() {
 
       {error && (
         <div className="w-full text-center py-12">
-          <p className="text-gray-500">⚠️ Error occured 👷🏻‍♀️</p>
+          <p className="text-gray-500">⚠️ Error occured 👷🏻‍♀️ or keyword not exist</p>
         </div>
       )}
 

@@ -82,9 +82,9 @@ export default function PalettePage({ params }: PalettePageProps) {
 
   if (loading) {
     return (
-      <div className="w-full min-h-screen bg-white flex flex-col justify-center items-center gap-4 px-20 pt-8 pb-24">
-        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-        <p>Loading...</p>
+      <div className="w-full min-h-screen bg-white flex flex-col justify-center items-center gap-4 px-20 pt-8 pb-24 text-gray-500">
+        <div className="w-12 h-12 border-4 border-gray-400 border-t-transparent rounded-full animate-spin" />
+        <p>Please wait...</p>
       </div>
     );
   }
