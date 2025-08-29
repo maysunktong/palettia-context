@@ -5,16 +5,7 @@ import { useFavorites } from "../../contexts/FavoritesContext";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useUserContext } from "../../contexts/UserContext";
-
-const loadFavorites = (username: string): Palette[] => {
-  try {
-    const saved = localStorage.getItem(`favorites_${username}`);
-    return saved ? JSON.parse(saved) : [];
-  } catch (error) {
-    console.error("Error loading favorites:", error);
-    return [];
-  }
-};
+import { loadFavorites } from "../../utils/generator";
 
 export default function AdminDashboard() {
   const router = useRouter();
