@@ -113,7 +113,8 @@ export default function PaletteGenerator() {
             {palettes.map((palette) => (
               <div
                 key={palette.id}
-                className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
+                onClick={() => navigateToSinglePalette(palette)}
+                className="cursor-pointer bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
               >
                 <div className="p-4">
                   <div className="flex items-center justify-between">
@@ -136,7 +137,7 @@ export default function PaletteGenerator() {
                         className="group relative flex-1 aspect-square overflow-hidden border-1 border-amber-50"
                         style={{ backgroundColor: color }}
                       >
-                        <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-transparent hover:text-gray-700">
+                        <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-gray-400 md:text-transparent md:hover:text-gray-600">
                           {color}
                         </span>
                       </div>
