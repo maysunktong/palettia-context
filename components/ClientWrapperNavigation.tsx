@@ -1,4 +1,4 @@
-/* Burrito my layout just to be able to use client T_T */
+/* Burrito my layout just to be able to use 'use client' 😵‍💫 */
 "use client";
 
 import Navigation from "./Navigation";
