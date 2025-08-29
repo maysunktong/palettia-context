@@ -4,20 +4,11 @@ import { useFavorites } from "../../contexts/FavoritesContext";
 import { useUserContext } from "../../contexts/UserContext";
 import { useEffect } from "react";
 import { X } from "lucide-react";
-
-const loadFavorites = (username: string): Palette[] => {
-  try {
-    const saved = localStorage.getItem(`favorites_${username}`);
-    return saved ? JSON.parse(saved) : [];
-  } catch (error) {
-    console.error("Error loading favorites:", error);
-    return [];
-  }
-};
+import { loadFavorites } from "../../utils/generator";
 
 export default function Favorites() {
   const router = useRouter();
-  const { user, setUser } = useUserContext() as UserContext;
+  const { user } = useUserContext() as UserContext;
   const { favorites, setFavorites } = useFavorites() as FavoritesContext;
 
   const username = user.name;

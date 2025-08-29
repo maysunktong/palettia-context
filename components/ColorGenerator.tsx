@@ -74,7 +74,7 @@ export default function ColorGenerator() {
   }, []);
 
   const navigateToSinglePalette = (palette: Palette) => {
-    const route = encodeURIComponent(palette.text);
+    const route = decodeURIComponent(palette.text);
     console.log("Navigating to palette:", route);
     router.push(`/${route}`);
   };
@@ -170,7 +170,9 @@ export default function ColorGenerator() {
 
       {error && (
         <div className="w-full text-center py-12">
-          <p className="text-gray-500">⚠️ Error occured 👷🏻‍♀️ or keyword not exist</p>
+          <p className="text-gray-500">
+            ⚠️ Error occured 👷🏻‍♀️ or keyword not exist
+          </p>
         </div>
       )}
 

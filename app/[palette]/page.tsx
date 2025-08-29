@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Check, Heart, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "../../contexts/UserContext";
@@ -10,13 +10,18 @@ export default function PalettePage({ params }: PalettePageProps) {
   const router = useRouter();
   const [palette, setPalette] = useState<Palette | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [paletteName, setPaletteName] = useState<string>("");
   const { user } = useUserContext() as UserContext;
   const { favorites, setFavorites } = useFavorites() as FavoritesContext;
   const [isAddingFavorite, setIsAddingFavorite] = useState(false);
   const username = user.name;
 
-  const resolvedParams = use(params);
-  const paletteName = decodeURIComponent(resolvedParams.palette);
+  useEffect(() => {
+    params.then((resolvedParams) => {
+      const name = decodeURIComponent(resolvedParams.palette);
+      setPaletteName(name);
+    });
+  }, [params]);
 
   const isFavorite = palette
     ? favorites.some((fav) => fav.id === palette.id)
