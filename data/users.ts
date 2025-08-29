@@ -1,6 +1,6 @@
 export const UserData: User[] = [
   {
-    name: "User1",
+    name: "user1",
     lastname: "Lastname",
     password: "user",
     email: "user1@mail.com",
@@ -8,7 +8,7 @@ export const UserData: User[] = [
     role: "user",
   },
   {
-    name: "User2",
+    name: "user2",
     lastname: "Lastname",
     password: "user",
     email: "user2@mail.com",
@@ -16,7 +16,7 @@ export const UserData: User[] = [
     role: "user",
   },
   {
-    name: "Admin",
+    name: "admin",
     lastname: "Lastname",
     password: "admin",
     email: "admin@mail.com",
