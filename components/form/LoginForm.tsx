@@ -5,18 +5,6 @@ import { UserData } from "../../data/users";
 import { useUserContext } from "../../contexts/UserContext";
 import { useRouter } from "next/navigation";
 
-type FormInputs = {
-  username: string;
-  password: string;
-  role?: "user" | "admin";
-};
-
-type FormErrors = {
-  username?: string;
-  password?: string;
-  role?: string;
-};
-
 export default function LoginForm() {
   const router = useRouter();
   const [formInput, setFormInput] = useState<FormInputs>({

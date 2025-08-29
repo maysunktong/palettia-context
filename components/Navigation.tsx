@@ -34,7 +34,7 @@ export default function Navigation() {
     return;
   };
 
-  /* animation GSAP for sidebar only */
+  /* animation GSAP */
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
 
@@ -109,7 +109,7 @@ export default function Navigation() {
                     if (el) itemsRef.current[index] = el;
                   }}
                 >
-                 <span className="w-6 h-6">{item.icon}</span>  {item.name}
+                  <span className="w-6 h-6">{item.icon}</span> {item.name}
                 </li>
               </Link>
             );

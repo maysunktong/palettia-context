@@ -1,11 +1,11 @@
 "use client";
 
-import ColorGenerator from "../components/ColorGenerator";
+import PaletteGenerator from "../components/PaletteGenerator";
 
 export default function Home() {
   return (
     <>
-      <ColorGenerator />
+      <PaletteGenerator />
     </>
   );
 }

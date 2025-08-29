@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Search, ExternalLink } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function ColorGenerator() {
+export default function PaletteGenerator() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
