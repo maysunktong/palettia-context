@@ -1,6 +1,7 @@
 /* Burrito my layout just to be able to use 'use client' 😵‍💫 */
 "use client";
 
+import Footer from "./Footer";
 import Navigation from "./Navigation";
 import WelcomeBanner from "./WelcomeBanner";
 
@@ -20,6 +21,7 @@ export default function ClientWrapperNavigation({
       <div className="col-span-1 md:col-span-16">
         <WelcomeBanner />
         {children}
+        <Footer />
       </div>
 
       {/* Mobile Nav*/}
