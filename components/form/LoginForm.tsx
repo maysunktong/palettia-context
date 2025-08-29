@@ -279,7 +279,7 @@ export default function LoginForm() {
               {isShow && (
                 <div>
                   <ul>
-                    <li>admin / password: admin (admin dashboard)</li>
+                    <li>admin / password: admin</li>
                     <li>user1 / password: user</li>
                     <li>user2 / password: user</li>
                   </ul>
