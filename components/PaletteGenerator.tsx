@@ -81,16 +81,16 @@ export default function PaletteGenerator() {
 
   return (
     <div className="w-full min-h-screen bg-white px-8 md:px-20 pt-8 md:pt-12 pb-6 md:pb-24">
-      <div className="text-center pb-6 space-y-4">
+      <div className="text-center pb-6 space-y-2">
         <h1 className="text-xl md:text-3xl font-bold text-gray-800">
           Color Palette Generator
         </h1>
-        <p className="text-xs md:text-lg text-blue-600 max-w-2xl mx-auto">
+        <p className="text-xs md:text-lg text-gray-400 max-w-2xl mx-auto">
           Type to generate your very own palettes 🎨
         </p>
       </div>
-      <div className="max-w-4xl mx-auto mb-4">
-        <form onSubmit={handleSearch} className="relative mb-6">
+      <div className="max-w-2xl mx-auto mb-4">
+        <form onSubmit={handleSearch} className="relative py-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
