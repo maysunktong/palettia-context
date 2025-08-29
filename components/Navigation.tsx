@@ -89,14 +89,14 @@ export default function Navigation() {
           className="hidden dark:block"
         />
       </Link>
-      <ul className="w-full flex flex-col justify-center items-start gap-1 py-6">
+      <ul className="w-full flex flex-col justify-center items-start gap-2 py-12">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
 
           return (
             <Link key={item.name} href={item.path} className="w-full">
               <li
-                className={`w-full flex gap-6 p-4 cursor-pointer rounded 
+                className={`text-sm md:text-shadow-md w-full flex gap-6 p-3 cursor-pointer rounded 
                   ${isActive ? "bg-blue-600 text-white" : "hover:bg-gray-200 dark:hover:text-black"}
                 `}
                 ref={(el: HTMLLIElement | null) => {

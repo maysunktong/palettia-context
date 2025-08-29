@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { UserData } from "../../data/users";
 import { useUserContext } from "../../contexts/UserContext";
+import { useRouter } from "next/navigation";
 
 type FormInputs = {
   username: string;
@@ -17,6 +18,7 @@ type FormErrors = {
 };
 
 export default function LoginForm() {
+  const router = useRouter();
   const [formInput, setFormInput] = useState<FormInputs>({
     username: "",
     password: "",
@@ -84,7 +86,7 @@ export default function LoginForm() {
         password: "",
       });
     }, 1000);
-    return;
+    return router.push("/");
   };
 
   useEffect(() => {

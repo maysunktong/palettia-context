@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useEffect, useState } from "react";
@@ -25,7 +26,6 @@ export default function AdminDashboard() {
   >([]);
 
   const usernames = ["User1", "User2"];
-
   useEffect(() => {
     const data = usernames.map((username) => ({
       username,
@@ -35,6 +35,12 @@ export default function AdminDashboard() {
 
     setFavorites(data.flatMap((u) => u.favorites));
   }, []);
+
+  useEffect(() => {
+    if (!user || user.role !== "admin") {
+      router.replace("/");
+    }
+  }, [user, router]);
 
   const removeFromFavorites = (username: string, palette: Palette) => {
     const updated = allFavorites.map((userData) =>
@@ -65,8 +71,6 @@ export default function AdminDashboard() {
     const route = encodeURIComponent(palette.text);
     router.push(`/${route}`);
   };
-
-  if (user.role === "user") return router.push("/");
 
   return (
     <div className="w-full min-h-screen bg-white p-8 pb-24">
