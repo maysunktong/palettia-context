@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { UserData } from "../../data/users";
 import { useUserContext } from "../../contexts/UserContext";
 import { useRouter } from "next/navigation";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -93,6 +95,17 @@ export default function LoginForm() {
     }
   }, [setUser]);
 
+  /* Logo spinning */
+  useGSAP(() => {
+    gsap.from("#logo-spin", {
+      repeat: -1,
+      yoyo: true,
+      rotation: 360,
+      duration: 3,
+      ease: "power1.inOut",
+    });
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">
       <div className="hidden md:block bg-cover bg-center bg-[url(/login-bg.jpg)]"></div>
@@ -101,16 +114,19 @@ export default function LoginForm() {
           onSubmit={handleSubmit}
           className="w-full max-w-sm p-8 bg-background rounded-lg shadow-md md:shadow-none space-y-2"
         >
+          <div className="flex justify-center items-center">
+            <img id="logo-spin" src="/favicon.png" alt="logo" width={100} />
+          </div>
           <div className="text-center py-6">
             <img
-              src="/logo-light.png"
+              src="/nologo-light.png"
               alt="Logo"
               width={300}
               height={300}
               className="block dark:hidden"
             />
             <img
-              src="/logo-dark.png"
+              src="/nologo-dark.png"
               alt="Logo Dark"
               width={300}
               height={300}
@@ -187,16 +203,19 @@ export default function LoginForm() {
             onSubmit={handleSubmit}
             className="w-11/12 max-w-sm p-8 shadow-lg bg-background"
           >
+            <div className="flex justify-center items-center">
+              <img id="logo-spin" src="/favicon.png" alt="logo" width={100} />
+            </div>
             <div className="text-center">
               <img
-                src="/logo-light.png"
+                src="/nologo-light.png"
                 alt="Logo"
                 width={300}
                 height={300}
                 className="block dark:hidden"
               />
               <img
-                src="/logo-dark.png"
+                src="/nologo-dark.png"
                 alt="Logo Dark"
                 width={300}
                 height={300}

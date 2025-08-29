@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUserContext } from "../contexts/UserContext";
+import { useGSAP } from "@gsap/react";
 
 const userNavItems = [
   { name: "Home", icon: <House />, path: "/" },
@@ -38,7 +39,7 @@ export default function Navigation() {
   const containerRef = useRef(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.fromTo(
       containerRef.current,
       { x: -60, opacity: 0 },
