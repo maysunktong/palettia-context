@@ -117,19 +117,19 @@ export default function LoginForm() {
           <div className="flex justify-center items-center">
             <img id="logo-spin" src="/favicon.png" alt="logo" width={100} />
           </div>
-          <div className="text-center py-6">
+          <div className="flex flex-col justify-center items-center py-6">
             <img
               src="/nologo-light.png"
               alt="Logo"
-              width={300}
-              height={300}
+              width={200}
+              height={200}
               className="block dark:hidden"
             />
             <img
               src="/nologo-dark.png"
               alt="Logo Dark"
-              width={300}
-              height={300}
+              width={200}
+              height={200}
               className="hidden dark:block"
             />
           </div>
@@ -206,19 +206,19 @@ export default function LoginForm() {
             <div className="flex justify-center items-center">
               <img id="logo-spin" src="/favicon.png" alt="logo" width={100} />
             </div>
-            <div className="text-center">
+            <div className="flex flex-col justify-center items-center py-2">
               <img
                 src="/nologo-light.png"
                 alt="Logo"
-                width={300}
-                height={300}
+                width={200}
+                height={200}
                 className="block dark:hidden"
               />
               <img
                 src="/nologo-dark.png"
                 alt="Logo Dark"
-                width={300}
-                height={300}
+                width={200}
+                height={200}
                 className="hidden dark:block"
               />
             </div>
