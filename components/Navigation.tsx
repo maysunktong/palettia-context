@@ -143,7 +143,7 @@ export default function Navigation() {
         <button
           type="button"
           onClick={handleLogout}
-          className="p-2 flex flex-col items-center"
+          className="p-2 flex flex-col items-center text-gray-500"
         >
           {""}
           <LogOut />

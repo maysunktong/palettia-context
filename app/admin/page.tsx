@@ -25,7 +25,7 @@ export default function AdminDashboard() {
     { username: string; favorites: Palette[] }[]
   >([]);
 
-  const usernames = ["User1", "User2"];
+  const usernames = ["user1", "user2"];
   useEffect(() => {
     const data = usernames.map((username) => ({
       username,
@@ -85,7 +85,7 @@ export default function AdminDashboard() {
           </h2>
 
           {favorites.length === 0 ? (
-            <p className="text-gray-500 text-sm mb-4">
+            <p className="text-gray-500 text-sm mb-4 text-center py-4">
               No favorites for {username}
             </p>
           ) : (
