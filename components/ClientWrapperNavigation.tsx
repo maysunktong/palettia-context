@@ -10,13 +10,21 @@ export default function ClientWrapperNavigation({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-20 min-h-screen w-full">
-      <div className="col-span-3">
+    <div className="min-h-screen w-full grid grid-cols-1 md:grid-cols-20">
+      {/* Desktop Nav */}
+      <div className="hidden md:block md:col-span-4">
         <Navigation />
       </div>
-      <div className="col-span-17">
+
+      {/* Main Content */}
+      <div className="col-span-1 md:col-span-16">
         <WelcomeBanner />
         {children}
+      </div>
+
+      {/* Mobile Nav*/}
+      <div className="md:hidden">
+        <Navigation />
       </div>
     </div>
   );
