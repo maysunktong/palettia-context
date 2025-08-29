@@ -30,7 +30,7 @@ export default function PalettePage({ params }: PalettePageProps) {
       saveFavorites(username, currentFavorites);
       setFavorites(currentFavorites);
       setIsAddingFavorite(false);
-    }, 1000);
+    }, 500);
   };
 
   const saveFavorites = (username: string, favorites: Palette[]) => {
@@ -109,7 +109,7 @@ export default function PalettePage({ params }: PalettePageProps) {
               className="cursor-pointer"
             >
               {isAddingFavorite ? (
-                <div className="flex gap-2 rounded text-blue-500 p-2 border-1 border-blue-400">
+                <div className="flex gap-2 rounded text-gray-500 p-2 border-1 border-gray-400">
                   <Loader2 className="w-6 h-6 animate-spin" />
                   <p>Adding palette...</p>
                 </div>
