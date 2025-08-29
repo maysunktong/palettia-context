@@ -45,8 +45,8 @@ export default function Favorites() {
   }, [username]);
 
   return (
-    <div className="w-full min-h-screen bg-white p-8 pb-24">
-      <h1 className="text-center text-2xl md:text-4xl font-bold text-gray-800 my-12">
+    <div className="w-full min-h-screen bg-white px-8 md:px-20 pt-8 md:pt-12 pb-6 md:pb-24">
+      <h1 className="text-center text-xl md:text-3xl font-bold text-gray-800 pb-6">
         Favorite list
       </h1>
       {favorites.length === 0 ? (

@@ -95,13 +95,13 @@ export default function PalettePage({ params }: PalettePageProps) {
   }
 
   return (
-    <div className="w-full h-full bg-white p-8">
+    <div className="w-full h-full bg-white p-8 text-sm md:text-md">
       <div className="w-full">
         <div className="flex justify-between items-center mb-8">
           <button
             type="button"
             onClick={() => router.push("/")}
-            className="flex justify-center items-center gap-2 text-md text-gray-600 hover:text-blue-600 cursor-pointer"
+            className="flex justify-center items-center gap-2  text-gray-600 hover:text-blue-600 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             Back
