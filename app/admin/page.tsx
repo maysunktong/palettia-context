@@ -36,6 +36,7 @@ export default function AdminDashboard() {
     setFavorites(data.flatMap((u) => u.favorites));
   }, []);
 
+  /* Block access for users to admin dashboard */
   useEffect(() => {
     if (!user || user.role !== "admin") {
       router.replace("/");
