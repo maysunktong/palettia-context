@@ -80,7 +80,7 @@ export default function ColorGenerator() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white p-8 pb-24">
+    <div className="w-full min-h-screen bg-white px-8 md:px-20 pt-8 pb-24">
       <div className="text-center my-6 md:my-12">
         <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-5">
           Color Palette Generator

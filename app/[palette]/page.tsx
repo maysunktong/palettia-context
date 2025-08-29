@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import { ArrowLeft, Heart } from "lucide-react";
+import { ArrowLeft, Check, Heart, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "../../contexts/UserContext";
 import { useFavorites } from "../../contexts/FavoritesContext";
@@ -12,6 +12,7 @@ export default function PalettePage({ params }: PalettePageProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useUserContext() as UserContext;
   const { favorites, setFavorites } = useFavorites() as FavoritesContext;
+  const [isAddingFavorite, setIsAddingFavorite] = useState(false);
   const username = user.name;
 
   const resolvedParams = use(params);
@@ -23,10 +24,13 @@ export default function PalettePage({ params }: PalettePageProps) {
 
   const handleSaveFavorites = () => {
     if (!palette || isFavorite) return;
-
-    const currentFavorites = [...favorites, palette];
-    saveFavorites(username, currentFavorites);
-    setFavorites(currentFavorites);
+    setIsAddingFavorite(true);
+    setTimeout(() => {
+      const currentFavorites = [...favorites, palette];
+      saveFavorites(username, currentFavorites);
+      setFavorites(currentFavorites);
+      setIsAddingFavorite(false);
+    }, 1000);
   };
 
   const saveFavorites = (username: string, favorites: Palette[]) => {
@@ -78,7 +82,7 @@ export default function PalettePage({ params }: PalettePageProps) {
 
   if (loading) {
     return (
-      <div className="w-full min-h-screen bg-white p-8 flex flex-col justify-center items-center gap-4">
+      <div className="w-full min-h-screen bg-white flex flex-col justify-center items-center gap-4 px-20 pt-8 pb-24">
         <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
         <p>Loading...</p>
       </div>
@@ -102,15 +106,23 @@ export default function PalettePage({ params }: PalettePageProps) {
             <button
               type="button"
               onClick={handleSaveFavorites}
-              className="p-2 rounded-full text-gray-400 hover:text-red-500 transition-colors"
-              title={
-                isFavorite ? "Already added to favorites" : "Add to favorites"
-              }
+              className="cursor-pointer"
             >
-              {isFavorite ? (
-                <span className="text-red-500 font-medium">Added</span>
+              {isAddingFavorite ? (
+                <div className="flex gap-2 rounded text-blue-500 p-2 border-1 border-blue-400">
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                  <p>Adding palette...</p>
+                </div>
+              ) : isFavorite ? (
+                <div className="flex gap-2 rounded text-green-500 p-2 border-1 border-green-400">
+                  <Check className="w-6 h-6" />
+                  <p>Palette is added</p>
+                </div>
               ) : (
-                <Heart className="w-6 h-6" />
+                <div className="flex gap-2 rounded text-gray-400 p-2 border-1 border-gray-300 hover:border-red-500 hover:text-red-500">
+                  <Heart className="w-6 h-6 hover:fill-red-500" />
+                  <p>Add to favorites</p>
+                </div>
               )}
             </button>
           )}
@@ -154,4 +166,3 @@ export default function PalettePage({ params }: PalettePageProps) {
     </div>
   );
 }
-
