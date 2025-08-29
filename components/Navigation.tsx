@@ -3,7 +3,7 @@
 import gsap from "gsap";
 import { User, HeartPlus, House, Users, LogOut } from "lucide-react";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUserContext } from "../contexts/UserContext";
 import { useGSAP } from "@gsap/react";
