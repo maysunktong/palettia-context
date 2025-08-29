@@ -109,7 +109,7 @@ export default function PalettePage({ params }: PalettePageProps) {
               className="cursor-pointer"
             >
               {isAddingFavorite ? (
-                <div className="flex gap-2 rounded text-gray-500 p-2 border-1 border-gray-400">
+                <div className="flex gap-2 rounded text-gray-400 p-2 border-1 border-gray-300">
                   <Loader2 className="w-6 h-6 animate-spin" />
                   <p>Adding palette...</p>
                 </div>
