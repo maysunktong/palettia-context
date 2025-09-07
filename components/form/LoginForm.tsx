@@ -64,7 +64,6 @@ export default function LoginForm() {
 
     setTimeout(() => {
       const validationErrors = handleFormValidation(formInput);
-      console.log("Errors", validationErrors); /* Object form */
       if (Object.keys(validationErrors).length > 0) {
         setError(validationErrors);
         setIsLoading(false);
