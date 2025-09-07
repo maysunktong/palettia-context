@@ -8,7 +8,7 @@ import { useNavigateToSinglePalette } from "../utils/navigatePalette";
 export default function PaletteGenerator() {
   const searchParams = useSearchParams();
   const navigateToSinglePalette = useNavigateToSinglePalette();
-  
+
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [palettes, setPalettes] = useState<Palette[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,10 +27,7 @@ export default function PaletteGenerator() {
 
     try {
       const response = await fetch(
-        `/api/palette?q=${encodeURIComponent(randomizedSearchQuery)}`,
-        {
-          method: "GET",
-        }
+        `/api/palette?q=${encodeURIComponent(randomizedSearchQuery)}`
       );
 
       if (!response.ok) {
@@ -65,7 +62,7 @@ export default function PaletteGenerator() {
   };
 
   useEffect(() => {
-    const urlSearchQuery = searchParams.get("search");
+    const urlSearchQuery = searchParams.get("q");
     if (urlSearchQuery) {
       setSearchQuery(urlSearchQuery);
       fetchPalettes(urlSearchQuery);
