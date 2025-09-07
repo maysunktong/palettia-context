@@ -17,35 +17,39 @@ export default function LoginForm() {
   const [formInput, setFormInput] =
     useState<LoginFormInputs>(initialFormInputs);
   const { setUser } = useUserContext() as UserContext;
-  const [error, setError] = useState<FormErrors>({});
+  const [error, setError] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isShow, setIsShow] = useState(false);
+  const [isTestUsersShow, setIsTestUsersShow] = useState(false);
 
-  const handleFormValidation = (input: LoginFormInputs): FormErrors => {
-    const errorLog: FormErrors = {};
+  /* Validate only Username and Password */
+  const handleFormValidation = (input: LoginFormInputs): LoginFormErrors => {
+    const errorLog: LoginFormErrors = {};
 
     if (!input.username.trim()) {
-      errorLog.username = "Username is required";
+      errorLog.username = "Username is required ‼️";
     } else {
-      const foundUser = UserData.find((u) => u.name === input.username);
+      const foundUser = UserData.find((item) => item.name === input.username);
       if (!foundUser) {
-        errorLog.username = "This username does not exist!";
+        errorLog.username = "This username does not exist! ❌";
       }
     }
 
     if (!input.password.trim()) {
-      errorLog.password = "Password is required";
+      errorLog.password = "Password is required ‼️";
     } else {
-      const foundPassword = UserData.find((u) => u.password === input.password);
+      const foundPassword = UserData.find(
+        (item) => item.password === input.password
+      );
       if (!foundPassword) {
-        errorLog.password = "Wrong password!";
+        errorLog.password = "Wrong password! ❌";
       }
     }
 
     return errorLog;
   };
 
-  const handleChange = (e: { target: { name: string; value: any } }) => {
+  /* handle change of input - name and value of the certain input */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormInput((prev) => ({
       ...prev,
@@ -53,12 +57,13 @@ export default function LoginForm() {
     }));
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     setTimeout(() => {
       const validationErrors = handleFormValidation(formInput);
+      console.log('Errors', validationErrors); /* Object form */
       if (Object.keys(validationErrors).length > 0) {
         setError(validationErrors);
         setIsLoading(false);
@@ -66,26 +71,25 @@ export default function LoginForm() {
       }
 
       const loggedInUser = UserData.find(
-        (u) =>
-          u.name === formInput.username && u.password === formInput.password
+        (user) =>
+          user.name === formInput.username &&
+          user.password === formInput.password
       );
+
       if (loggedInUser) {
         setUser(loggedInUser);
-        console.log("✅ LOGGED IN -- User: " + loggedInUser.name);
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+        console.log("✅ LOGGED IN User: ", loggedInUser.name);
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
         router.push("/");
       }
 
-      setFormInput({
-        username: "",
-        password: "",
-      });
+      setFormInput(initialFormInputs);
       setIsLoading(false);
     }, 1000);
   };
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("loggedInUser");
+    const savedUser = localStorage.getItem("user");
     if (savedUser) {
       try {
         const parsedUser = JSON.parse(savedUser);
@@ -93,12 +97,13 @@ export default function LoginForm() {
         console.log("✅ LOGGED IN -- User: " + parsedUser.name);
       } catch (error) {
         console.error("Error parsing saved user data:", error);
-        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("user");
+        setUser(null);
       }
     }
   }, [setUser]);
 
-  /* Logo spinning */
+  /* GSAP logo spinning */
   useGSAP(() => {
     gsap.from("#logo-spin", {
       repeat: -1,
@@ -111,7 +116,8 @@ export default function LoginForm() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 w-full h-screen">
-      <div className="hidden md:block bg-cover bg-center bg-[url(/login-bg.jpg)]"></div>
+      {/* Desktop Login */}
+      <div className="hidden md:block bg-cover bg-center bg-[url(/login-bg.jpg)]" />
       <div className="flex justify-center items-center bg-background">
         <form
           onSubmit={handleSubmit}
@@ -146,8 +152,9 @@ export default function LoginForm() {
             type="text"
             onChange={handleChange}
             placeholder="Enter your username"
-            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.username ? "border-red-500" : "border-gray-300"
-              }`}
+            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              error.username ? "border-red-500" : "border-gray-300"
+            }`}
           />
           {error.username && (
             <span className="text-red-500 text-sm mt-1 block">
@@ -164,8 +171,9 @@ export default function LoginForm() {
             type="password"
             onChange={handleChange}
             placeholder="Enter your password"
-            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.password ? "border-red-500" : "border-gray-300"
-              }`}
+            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              error.password ? "border-red-500" : "border-gray-300"
+            }`}
           />
           {error.password && (
             <span className="text-red-500 text-sm mt-1 block">
@@ -181,12 +189,12 @@ export default function LoginForm() {
           <div className="text-gray-400 text-sm text-center py-3">
             <button
               type="button"
-              onClick={() => setIsShow(!isShow)}
+              onClick={() => setIsTestUsersShow(!isTestUsersShow)}
               className="hover:underline cursor-pointer"
             >
               Test user login
             </button>
-            {isShow && (
+            {isTestUsersShow && (
               <div>
                 <ul>
                   <li>admin / password: admin (admin dashboard)</li>
@@ -198,6 +206,8 @@ export default function LoginForm() {
           </div>
         </form>
       </div>
+
+      {/* Mobile Login */}
       <div className="absolute top-0 left-0 w-full h-full md:hidden bg-cover bg-center bg-[url(/login-bg.jpg)] ">
         <div className="flex justify-center items-center w-full h-full ">
           <form
@@ -223,18 +233,19 @@ export default function LoginForm() {
                 className="hidden dark:block"
               />
             </div>
-            <label htmlFor="username" className="block font-medium mb-1">
+            <label htmlFor="username-mobile" className="block font-medium mb-1">
               Username
             </label>
             <input
               name="username"
-              id="username"
+              id="username-mobile"
               value={formInput.username}
               type="text"
               onChange={handleChange}
               placeholder="Enter your username"
-              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.username ? "border-red-500" : "border-gray-300"
-                }`}
+              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                error.username ? "border-red-500" : "border-gray-300"
+              }`}
             />
             {error.username && (
               <span className="text-red-500 text-sm mt-1 block">
@@ -242,18 +253,22 @@ export default function LoginForm() {
               </span>
             )}
 
-            <label htmlFor="password" className="block font-medium mt-4 mb-1">
+            <label
+              htmlFor="password-mobile"
+              className="block font-medium mt-4 mb-1"
+            >
               Password
             </label>
             <input
               name="password"
-              id="password"
+              id="password-mobile"
               value={formInput.password}
               type="password"
               onChange={handleChange}
               placeholder="Enter your password"
-              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.password ? "border-red-500" : "border-gray-300"
-                }`}
+              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                error.password ? "border-red-500" : "border-gray-300"
+              }`}
             />
             {error.password && (
               <span className="text-red-500 text-sm mt-1 block">
@@ -270,12 +285,12 @@ export default function LoginForm() {
             <div className="text-gray-400 text-sm text-center py-3">
               <button
                 type="button"
-                onClick={() => setIsShow(!isShow)}
+                onClick={() => setIsTestUsersShow(!isTestUsersShow)}
                 className="hover:underline cursor-pointer"
               >
                 Test user login
               </button>
-              {isShow && (
+              {isTestUsersShow && (
                 <div>
                   <ul>
                     <li>admin / password: admin (admin dashboard)</li>

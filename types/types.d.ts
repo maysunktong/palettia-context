@@ -19,7 +19,7 @@ interface LoginFormInputs {
   role?: "user" | "admin";
 }
 
-interface FormErrors {
+interface LoginFormErrors {
   username?: string;
   password?: string;
   role?: string;
