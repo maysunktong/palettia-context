@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { ArrowLeft, Check, Heart, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import router from "next/router";
 import { useUserContext } from "../../contexts/UserContext";
 import { useFavorites } from "../../contexts/FavoritesContext";
 
 export default function PalettePage({ params }: PalettePageProps) {
-  const router = useRouter();
   const [palette, setPalette] = useState<Palette | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [paletteName, setPaletteName] = useState<string>("");
@@ -56,8 +55,9 @@ export default function PalettePage({ params }: PalettePageProps) {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        const foundPalette =
-          data.find((p) => p.text.toLowerCase() === name.toLowerCase());
+        const foundPalette = data.find(
+          (p) => p.text.toLowerCase() === name.toLowerCase()
+        );
         setPalette(foundPalette);
       } else {
         setPalette(null);

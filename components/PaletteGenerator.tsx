@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Search, ExternalLink } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useNavigateToSinglePalette } from "../utils/navigatePalette";
 
 export default function PaletteGenerator() {
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const navigateToSinglePalette = useNavigateToSinglePalette();
+  
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [palettes, setPalettes] = useState<Palette[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -71,11 +73,6 @@ export default function PaletteGenerator() {
       fetchPalettes(randomizedSearchQuery);
     }
   }, []);
-
-  const navigateToSinglePalette = (palette: Palette) => {
-    const route = encodeURIComponent(palette.text);
-    router.push(`/${route}`);
-  };
 
   return (
     <div className="w-full min-h-screen bg-white px-8 md:px-20 pt-8 md:pt-12 pb-6 md:pb-24">

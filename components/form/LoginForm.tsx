@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { UserData } from "../../data/users";
 import { useUserContext } from "../../contexts/UserContext";
-import { useRouter } from "next/navigation";
+import router from "next/router";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -13,7 +13,6 @@ const initialFormInputs: LoginFormInputs = {
 };
 
 export default function LoginForm() {
-  const router = useRouter();
   const [formInput, setFormInput] =
     useState<LoginFormInputs>(initialFormInputs);
   const { setUser } = useUserContext() as UserContext;
@@ -63,7 +62,7 @@ export default function LoginForm() {
 
     setTimeout(() => {
       const validationErrors = handleFormValidation(formInput);
-      console.log('Errors', validationErrors); /* Object form */
+      console.log("Errors", validationErrors); /* Object form */
       if (Object.keys(validationErrors).length > 0) {
         setError(validationErrors);
         setIsLoading(false);

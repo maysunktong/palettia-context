@@ -1,16 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useFavorites } from "../../contexts/FavoritesContext";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useUserContext } from "../../contexts/UserContext";
 import { loadFavorites } from "../../utils/generator";
+import { useNavigateToSinglePalette } from "../../utils/navigatePalette";
+import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
-  const router = useRouter();
   const { setFavorites } = useFavorites() as FavoritesContext;
   const { user } = useUserContext() as UserContext;
+  const navigateToSinglePalette = useNavigateToSinglePalette();
+  const router = useRouter();
 
   const [allFavorites, setAllFavorites] = useState<
     { username: string; favorites: Palette[] }[]
@@ -57,11 +59,6 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error("Error updating favorites:", error);
     }
-  };
-
-  const navigateToSinglePalette = (palette: Palette) => {
-    const route = encodeURIComponent(palette.text);
-    router.push(`/${route}`);
   };
 
   return (
