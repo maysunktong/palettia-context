@@ -29,7 +29,6 @@ export default function Navigation() {
     setIsLoggingOut(true);
     setTimeout(() => {
       setUser(null);
-      localStorage.removeItem("user");
       setIsLoggingOut(false);
     }, 1000);
     return;

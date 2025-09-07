@@ -15,7 +15,7 @@ const initialFormInputs: LoginFormInputs = {
 export default function LoginForm() {
   const [formInput, setFormInput] =
     useState<LoginFormInputs>(initialFormInputs);
-  const { setUser } = useUserContext() as UserContext;
+  const { user, setUser } = useUserContext() as UserContext;
   const [error, setError] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isTestUsersShow, setIsTestUsersShow] = useState(false);
@@ -79,8 +79,6 @@ export default function LoginForm() {
 
       if (loggedInUser) {
         setUser(loggedInUser);
-        console.log("✅ LOGGED IN User: ", loggedInUser.name);
-        localStorage.setItem("user", JSON.stringify(loggedInUser));
         router.push("/");
       }
 
@@ -90,15 +88,13 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
+
+    if (user) {
       try {
-        const parsedUser = JSON.parse(savedUser);
-        setUser(parsedUser);
-        console.log("✅ LOGGED IN -- User: " + parsedUser.name);
+        setUser(user);
+        console.log("✅ LOGGED IN -- User: " + user.name);
       } catch (error) {
         console.error("Error parsing saved user data:", error);
-        localStorage.removeItem("user");
         setUser(null);
       }
     }
