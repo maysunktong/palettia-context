@@ -1,16 +1,29 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const { query } = await request.json();
-    if (!query) return NextResponse.json({ error: 'Query is required' }, { status: 400 });
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("q")?.trim();
 
-    const res = await fetch(`https://colormagic.app/api/palette/search?q=${encodeURIComponent(query)}`);
-    if (!res.ok) throw new Error(`API responded with status ${res.status}`);
+    if (!query) {
+      return NextResponse.json({ error: "Query is required" }, { status: 400 });
+    }
+
+    const res = await fetch(
+      `https://colormagic.app/api/palette/search?q=${encodeURIComponent(query)}`
+    );
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      return NextResponse.json(
+        { error: errorData.error || `Upstream error ${res.status}` },
+        { status: 502 }
+      );
+    }
 
     const data = await res.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, { status: 200 });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message || 'Unknown error' }, { status: 500 });
+    return NextResponse.json({ error: err.message ?? "Unknown error" }, { status: 500 });
   }
 }

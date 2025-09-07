@@ -24,13 +24,12 @@ export default function PaletteGenerator() {
     setError(null);
 
     try {
-      const response = await fetch("/api/palette", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query }),
-      });
+      const response = await fetch(
+        `/api/palette?q=${encodeURIComponent(randomizedSearchQuery)}`,
+        {
+          method: "GET",
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -75,7 +74,6 @@ export default function PaletteGenerator() {
 
   const navigateToSinglePalette = (palette: Palette) => {
     const route = decodeURIComponent(palette.text);
-    console.log("Navigating to palette:", route);
     router.push(`/${route}`);
   };
 
