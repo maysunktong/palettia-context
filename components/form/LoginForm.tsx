@@ -87,11 +87,9 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
-
     if (user) {
       try {
         setUser(user);
-        console.log("✅ LOGGED IN -- User: " + user.name);
       } catch (error) {
         console.error("Error parsing saved user data:", error);
         setUser(null);
