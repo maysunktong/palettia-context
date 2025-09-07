@@ -13,7 +13,7 @@ interface UserContext {
 }
 
 /* Login Form */
-interface FormInputs {
+interface LoginFormInputs {
   username: string;
   password: string;
   role?: "user" | "admin";

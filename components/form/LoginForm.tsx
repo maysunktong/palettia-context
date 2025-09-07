@@ -7,39 +7,42 @@ import { useRouter } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+const initialFormInputs: LoginFormInputs = {
+  username: "",
+  password: "",
+};
+
 export default function LoginForm() {
   const router = useRouter();
-  const [formInput, setFormInput] = useState<FormInputs>({
-    username: "",
-    password: "",
-  });
+  const [formInput, setFormInput] =
+    useState<LoginFormInputs>(initialFormInputs);
   const { setUser } = useUserContext() as UserContext;
   const [error, setError] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isShow, setIsShow] = useState(false);
 
-  const handleFormValidation = (input: FormInputs): FormErrors => {
-    const alertError: FormErrors = {};
+  const handleFormValidation = (input: LoginFormInputs): FormErrors => {
+    const errorLog: FormErrors = {};
 
     if (!input.username.trim()) {
-      alertError.username = "Username is required";
+      errorLog.username = "Username is required";
     } else {
       const foundUser = UserData.find((u) => u.name === input.username);
       if (!foundUser) {
-        alertError.username = "This username does not exist!";
+        errorLog.username = "This username does not exist!";
       }
     }
 
     if (!input.password.trim()) {
-      alertError.password = "Password is required";
+      errorLog.password = "Password is required";
     } else {
       const foundPassword = UserData.find((u) => u.password === input.password);
       if (!foundPassword) {
-        alertError.password = "Wrong password!";
+        errorLog.password = "Wrong password!";
       }
     }
 
-    return alertError;
+    return errorLog;
   };
 
   const handleChange = (e: { target: { name: string; value: any } }) => {
@@ -143,9 +146,8 @@ export default function LoginForm() {
             type="text"
             onChange={handleChange}
             placeholder="Enter your username"
-            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              error.username ? "border-red-500" : "border-gray-300"
-            }`}
+            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.username ? "border-red-500" : "border-gray-300"
+              }`}
           />
           {error.username && (
             <span className="text-red-500 text-sm mt-1 block">
@@ -162,9 +164,8 @@ export default function LoginForm() {
             type="password"
             onChange={handleChange}
             placeholder="Enter your password"
-            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              error.password ? "border-red-500" : "border-gray-300"
-            }`}
+            className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.password ? "border-red-500" : "border-gray-300"
+              }`}
           />
           {error.password && (
             <span className="text-red-500 text-sm mt-1 block">
@@ -232,9 +233,8 @@ export default function LoginForm() {
               type="text"
               onChange={handleChange}
               placeholder="Enter your username"
-              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                error.username ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.username ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {error.username && (
               <span className="text-red-500 text-sm mt-1 block">
@@ -252,9 +252,8 @@ export default function LoginForm() {
               type="password"
               onChange={handleChange}
               placeholder="Enter your password"
-              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                error.password ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-3 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 ${error.password ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {error.password && (
               <span className="text-red-500 text-sm mt-1 block">

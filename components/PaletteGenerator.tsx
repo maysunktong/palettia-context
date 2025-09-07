@@ -73,7 +73,7 @@ export default function PaletteGenerator() {
   }, []);
 
   const navigateToSinglePalette = (palette: Palette) => {
-    const route = decodeURIComponent(palette.text);
+    const route = encodeURIComponent(palette.text);
     router.push(`/${route}`);
   };
 

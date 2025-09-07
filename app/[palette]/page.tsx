@@ -49,30 +49,21 @@ export default function PalettePage({ params }: PalettePageProps) {
 
   const fetchPalette = async (name: string) => {
     setLoading(true);
-
     try {
-      const response = await fetch("/api/palette", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: name }),
-      });
-
+      const response = await fetch(
+        `/api/palette?q=${encodeURIComponent(name)}`
+      );
       const data = await response.json();
 
-      if (Array.isArray(data)) {
+      if (Array.isArray(data) && data.length > 0) {
         const foundPalette =
-          data.find((p) => p.text.toLowerCase() === name.toLowerCase()) ||
-          data[0];
-
-        console.log("Found palette:", foundPalette);
+          data.find((p) => p.text.toLowerCase() === name.toLowerCase());
         setPalette(foundPalette);
       } else {
-        console.log("No palette found");
+        setPalette(null);
       }
     } catch (error) {
-      console.log("Error fetching a palette:", error);
+      console.error("Error fetching palette:", error);
       setPalette(null);
     } finally {
       setLoading(false);
