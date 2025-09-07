@@ -13,7 +13,7 @@ const initialFormInputs: LoginFormInputs = {
 };
 
 export default function LoginForm() {
-  const [formInput, setFormInput] =import { useRouter } from "next/navigation";
+  const [formInput, setFormInput] =
     useState<LoginFormInputs>(initialFormInputs);
   const { setUser } = useUserContext() as UserContext;
   const [error, setError] = useState<LoginFormErrors>({});
