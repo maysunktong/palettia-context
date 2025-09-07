@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { UserData } from "../../data/users";
 import { useUserContext } from "../../contexts/UserContext";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -13,12 +13,14 @@ const initialFormInputs: LoginFormInputs = {
 };
 
 export default function LoginForm() {
-  const [formInput, setFormInput] =
+  const [formInput, setFormInput] =import { useRouter } from "next/navigation";
     useState<LoginFormInputs>(initialFormInputs);
   const { setUser } = useUserContext() as UserContext;
   const [error, setError] = useState<LoginFormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   const [isTestUsersShow, setIsTestUsersShow] = useState(false);
+
+  const router = useRouter();
 
   /* Validate only Username and Password */
   const handleFormValidation = (input: LoginFormInputs): LoginFormErrors => {

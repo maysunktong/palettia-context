@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ArrowLeft, Check, Heart, Loader2 } from "lucide-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useUserContext } from "../../contexts/UserContext";
 import { useFavorites } from "../../contexts/FavoritesContext";
 
@@ -14,6 +14,7 @@ export default function PalettePage({ params }: PalettePageProps) {
   const { favorites, setFavorites } = useFavorites() as FavoritesContext;
   const [isAddingFavorite, setIsAddingFavorite] = useState(false);
   const username = user.name;
+  const router = useRouter();
 
   useEffect(() => {
     params.then((resolvedParams) => {
