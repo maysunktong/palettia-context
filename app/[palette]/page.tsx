@@ -55,9 +55,9 @@ export default function PalettePage({ params }: PalettePageProps) {
       );
       const data = await response.json();
 
-      if (Array.isArray(data) && data.length > 0) {
+      if (data.length > 0) {
         const foundPalette = data.find(
-          (p) => p.text.toLowerCase() === name.toLowerCase()
+          (p: Palette) => p.text.toLowerCase() === name.toLowerCase()
         );
         setPalette(foundPalette);
       } else {
