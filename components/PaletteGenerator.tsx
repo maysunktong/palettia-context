@@ -27,7 +27,7 @@ export default function PaletteGenerator() {
 
     try {
       const response = await fetch(
-        `/api/palette?q=${encodeURIComponent(randomizedSearchQuery)}`
+        `/api/palette?q=${encodeURIComponent(query)}`
       );
 
       if (!response.ok) {
